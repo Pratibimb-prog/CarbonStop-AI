@@ -1,10 +1,10 @@
-# 🚦 CarbonStop-AI — Climate-Aware Traffic Signal Optimization
+# CarbonStop-AI — Climate-Aware Traffic Signal Optimization
 
 > Using reinforcement learning to reduce CO₂ emissions at traffic intersections by dynamically optimizing signal timing based on queue length, wait time, and real-time carbon grid intensity.
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
 A **Q-Learning agent** is trained on a simulated 4-way intersection. At every timestep it observes the current state — queue lengths, red durations, active phase, and the carbon intensity of the power grid at that hour — and selects the best signal action to minimize both vehicle waiting time and CO₂ emissions.
 
@@ -12,7 +12,7 @@ The trained agent is served via a **FastAPI backend** and integrated into a **Re
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 CarbonStop-AI/
@@ -28,7 +28,7 @@ CarbonStop-AI/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 You will need **two terminal windows** — one for the backend, one for the frontend.
 
@@ -57,7 +57,7 @@ python -m uvicorn main:app --reload --port 8000
 
 The API will be live at **`http://localhost:8000`**
 
-> 💡 If no `q_table.json` exists, the server will automatically train the agent on startup. This takes about a minute.
+> If no `q_table.json` exists, the server will automatically train the agent on startup. This takes about a minute.
 
 ---
 
@@ -80,7 +80,7 @@ The dashboard will open automatically at **`http://localhost:3000`**
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -107,14 +107,14 @@ The dashboard will open automatically at **`http://localhost:3000`**
 {
   "action": "keep_green",
   "carbon_intensity": 1.5,
-  "explanation": "🚑 AMBULANCE PRIORITY — immediate green for NS corridor.",
+  "explanation": "AMBULANCE PRIORITY — immediate green for NS corridor.",
   "ambulance_override": true
 }
 ```
 
 ---
 
-## ⚙️ Agent Details
+## Agent Details
 
 | Parameter | Value |
 |-----------|-------|
@@ -130,7 +130,7 @@ The reward function penalises waiting time, queue imbalance, unnecessary phase s
 
 ---
 
-## 🌍 Carbon Awareness
+## Carbon Awareness
 
 The agent adjusts behaviour based on grid carbon intensity at the current hour:
 
@@ -143,12 +143,12 @@ The agent is more aggressive about clearing queues during high-carbon night hour
 
 ---
 
-## 🚑 Ambulance Priority Override
+## Ambulance Priority Override
 
 If `ambulance_direction` is passed as `"NS"` or `"EW"` in a `/predict` request, the Q-table is bypassed entirely and the signal immediately switches green for that corridor. The response includes `"ambulance_override": true` so the frontend can display the override visually.
 
 ---
 
-## 📊 Emission Spike Detection
+## Emission Spike Detection
 
 Both the environment and the `/simulate` endpoint track the **peak CO₂ emission** recorded across an episode. If instantaneous emissions exceed **5.0 kg CO₂**, an additional penalty is applied to the reward, pushing the agent to avoid congestion spikes especially during high-carbon hours.
